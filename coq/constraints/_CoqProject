@@ -1,0 +1,19 @@
+# SPDX-License-Identifier: Apache-2.0
+# SPDX-FileCopyrightText: 2026 Next Ridge Solutions Ltd
+-Q . Constraints
+-Q gen Generated
+-Q ../spec ""
+
+gen/bmi_model_gen.v
+gen/bmi_wires_gen.v
+gen/bmi_scaffold_gen.v
+pfcs.v
+range_field.v
+range_field_pasta.v
+field_order_lift.v
+bits_kit.v
+../spec/bmi_rule.v
+gen/bmi_necessity_gen.v
+bmi_semantic.v
+bmi_soundness.v
+bmi_adequacy.v

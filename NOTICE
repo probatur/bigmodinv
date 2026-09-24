@@ -1,0 +1,10 @@
+SPDX-License-Identifier: Apache-2.0
+SPDX-FileCopyrightText: 2026 Next Ridge Solutions Ltd
+
+BigModInv, verified
+Copyright 2026 Next Ridge Solutions Ltd (nxridge.com), published as Probatur.
+
+This repository contains two sentences quoted from "Auditing Report for circom-bigint (circomlib)",
+prepared by the 0xPARC Community, the Ethereum Foundation and Veridise Inc. (2022). They are third-party
+text, quoted to identify the findings the specification answers to, and they are not covered by this
+repository's licence.
