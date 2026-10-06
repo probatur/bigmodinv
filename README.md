@@ -32,12 +32,32 @@ cd bigmodinv
 docker build .
 ```
 
-The build compiles every proof from source in the public Coq 8.20.1 image, pinned by digest in the Dockerfile,
-then re-checks the whole development, together with the parts of Coq's standard library it uses, with coqchk,
-Coq's independent kernel checker. It fails unless coqchk accepts everything and reports no axioms, and its last
+The build compiles every proof from source in the public Rocq 9.2 image, pinned by digest in the Dockerfile,
+then re-checks the whole development, together with the parts of the Rocq standard library it uses, with rocqchk,
+Rocq's independent kernel checker. It fails unless rocqchk accepts everything and reports no axioms, and its last
 step prints the theorem exactly as the kernel states it (reproduced below). With BuildKit, add
 `--progress=plain` to see every line. The same build runs on every push, from `.github/workflows/check.yml`. If
 you run it, you are welcome to add a line to [REPRODUCTIONS.md](REPRODUCTIONS.md).
+
+## Rocq 9.2 and the Coq legacy version
+
+The proofs now build with Rocq 9.2 (`coq/`, checked by `docker build .`). The version published with Coq 8.20.1
+is kept verbatim, byte for byte, in `coq-legacy/`, with its own one-command check, which uses the same pinned
+Coq 8.20.1 image as before:
+
+```
+docker build -f Dockerfile.legacy .
+```
+
+`check-legacy.sh` and `Dockerfile.legacy` differ from the earlier `check.sh` and `Dockerfile` only in their paths
+(`coq-legacy/`). Both checks run on every push. The changes from `coq-legacy/` to `coq/` are:
+
+- imports only: `From Coq Require Import ...` became `From Stdlib Require Import ...`, and the qualified
+  `Require Import Coq.Arith.Arith Coq.ZArith.Zpow_facts` became `Stdlib.Arith.Arith Stdlib.ZArith.Zpow_facts`;
+- no definition, lemma or theorem statement, and no proof, was changed (any further fix is listed here: none).
+
+The Rocq check itself uses `rocq makefile`, `rocq c` and `rocqchk` in place of `coq_makefile`, `coqc` and
+`coqchk`, with the same summary checks.
 
 ## The theorem, as the kernel states it
 
